@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "GtfsApi", "GtfsApi\GtfsApi.njsproj", "{344FBF61-17E7-412A-9C57-6018AEE35E79}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "RosebudApi", "GtfsApi\RosebudApi.njsproj", "{344FBF61-17E7-412A-9C57-6018AEE35E79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

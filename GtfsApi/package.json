@@ -1,11 +1,11 @@
 {
-  "name": "gtfsapi",
+  "name": "rosebudapi",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
-  "description": "GtfsApi",
+  "description": "RosebudApi",
   "author": {
     "name": "Christophe Gagnier"
   },
