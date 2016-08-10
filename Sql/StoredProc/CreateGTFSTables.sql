@@ -1,18 +1,18 @@
-DROP PROCEDURE IF EXISTS `my_bus`.`CreateGTFSTables`;
+DROP PROCEDURE IF EXISTS `rosebud_data`.`CreateGTFSTables`;
 DELIMITER $$
 
-CREATE PROCEDURE `my_bus`.`CreateGTFSTables`
+CREATE PROCEDURE `rosebud_data`.`CreateGTFSTables`
 (
 	IN pFeedId INT
 )
 BEGIN
 
-	DECLARE schemaName VARCHAR(20) DEFAULT `my_bus`.`GetSchemaFromFeedId`(pFeedId);
+	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
 	DECLARE schemaNameTemp VARCHAR(26) DEFAULT CONCAT(schemaName, '_temp');
 	
 	#Create temporary database structure
 	CALL ExecuteQuery(CONCAT('DROP DATABASE IF EXISTS ', schemaNameTemp));
-	CALL ExecuteQuery(CONCAT('CREATE DATABASE ', schemaNameTemp));
+	CALL ExecuteQuery(CONCAT('CREATE DATABASE ', schemaNameTemp, ' CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'));
 
 	CALL ExecuteQuery(CONCAT('CREATE TABLE IF NOT EXISTS `', schemaNameTemp,'`.`agency` 
 	(

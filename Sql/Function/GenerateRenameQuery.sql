@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS `my_bus`.`GenerateRenameQuery`;
+DROP FUNCTION IF EXISTS `rosebud_data`.`GenerateRenameQuery`;
 DELIMITER $$
 
-CREATE FUNCTION `my_bus`.`GenerateRenameQuery`
+CREATE FUNCTION `rosebud_data`.`GenerateRenameQuery`
 (
 	pSchemaName VARCHAR(20),
     pTempSchemaName VARCHAR(25)

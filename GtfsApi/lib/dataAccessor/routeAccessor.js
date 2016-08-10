@@ -8,7 +8,7 @@ exports.getAllRoutes = function (feedId, callback) {
 	sqlHelper.acquire(function (err, client) {
 		if (err) return callback(err)
 		
-		client.query("CALL `my_bus`.`GetAllRoutes`(?)", [feedId], function (err, rows) {
+		client.query("CALL `rosebud_data`.`GetAllRoutes`(?)", [feedId], function (err, rows) {
 			sqlHelper.release(client)
 			if (err) return callback(err)
 			
@@ -25,7 +25,7 @@ exports.getRouteDetails = function (feedId, routeId, date, callback) {
 	sqlHelper.acquire(function (err, client) {
 		if (err) return callback(err)
 		
-		client.query("CALL `my_bus`.`GetTripsForRoute`(?, ?, ?)", [feedId, routeId, date], function (err, rows) {
+		client.query("CALL `rosebud_data`.`GetTripsForRoute`(?, ?, ?)", [feedId, routeId, date], function (err, rows) {
 			sqlHelper.release(client)
 			if (err) return callback(err)
 			

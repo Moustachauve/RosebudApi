@@ -1,13 +1,13 @@
-DROP PROCEDURE IF EXISTS `my_bus`.`GetFeedDetails`;
+DROP PROCEDURE IF EXISTS `rosebud_data`.`GetFeedDetails`;
 DELIMITER $$
 
-CREATE PROCEDURE `my_bus`.`GetFeedDetails`
+CREATE PROCEDURE `rosebud_data`.`GetFeedDetails`
 (
 	IN pFeedId INT
 )
 BEGIN
 
-	DECLARE schemaName VARCHAR(20) DEFAULT `my_bus`.`GetSchemaFromFeedId`(pFeedId);
+	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
 
 	SET @sqlQuery= CONCAT('
 		SELECT

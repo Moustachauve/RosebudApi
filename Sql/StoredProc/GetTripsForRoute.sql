@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS `my_bus`.`GetTripsForRoute`;
+DROP PROCEDURE IF EXISTS `rosebud_data`.`GetTripsForRoute`;
 DELIMITER $$
 
-CREATE PROCEDURE `my_bus`.`GetTripsForRoute`
+CREATE PROCEDURE `rosebud_data`.`GetTripsForRoute`
 (
 	IN pFeedId INT,
 	IN prouteId varchar(30),
@@ -9,7 +9,7 @@ CREATE PROCEDURE `my_bus`.`GetTripsForRoute`
 )
 BEGIN
 	
-	DECLARE schemaName VARCHAR(20) DEFAULT `my_bus`.`GetSchemaFromFeedId`(pFeedId);
+	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
     DECLARE dateDayOfWeek INT;
     SET @serviceId = '';
     
@@ -82,9 +82,9 @@ END$$
 DELIMITER ;
 
 /*
-	CALL `my_bus`.`GetTripsForRoute`(4, '1', '20160620')
+	CALL `rosebud_data`.`GetTripsForRoute`(4, '1', '20160620')
 
-	CALL `my_bus`.`GetTripsForRoute`(1, '34', '20160623')
+	CALL `rosebud_data`.`GetTripsForRoute`(1, '34', '20160623')
 
-	CALL `my_bus`.`GetTripsForRoute`(6, '8401', '20160620')
+	CALL `rosebud_data`.`GetTripsForRoute`(6, '8401', '20160620')
 */

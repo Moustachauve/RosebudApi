@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS `my_bus`.`ExecuteQuery`;
+DROP PROCEDURE IF EXISTS `rosebud_data`.`ExecuteQuery`;
 DELIMITER $$
 
-CREATE PROCEDURE `my_bus`.`ExecuteQuery`
+CREATE PROCEDURE `rosebud_data`.`ExecuteQuery`
 (
 	IN pSqlQuery TEXT
 )

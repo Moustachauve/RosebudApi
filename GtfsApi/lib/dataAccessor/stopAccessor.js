@@ -7,7 +7,7 @@ exports.getStopsForTrip = function (feedId, tripId, callback) {
 	sqlHelper.acquire(function (err, client) {
 		if (err) return callback(err)
 		
-		client.query("CALL `my_bus`.`GetStopsForTrip`(?, ?)", [feedId, tripId], function (err, rows) {
+		client.query("CALL `rosebud_data`.`GetStopsForTrip`(?, ?)", [feedId, tripId], function (err, rows) {
 			sqlHelper.release(client)
 			if (err) return callback(err)
 			

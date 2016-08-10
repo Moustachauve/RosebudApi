@@ -1,14 +1,14 @@
-DROP PROCEDURE IF EXISTS `my_bus`.`GetStopsForTrip`;
+DROP PROCEDURE IF EXISTS `rosebud_data`.`GetStopsForTrip`;
 DELIMITER $$
 
-CREATE PROCEDURE `my_bus`.`GetStopsForTrip`
+CREATE PROCEDURE `rosebud_data`.`GetStopsForTrip`
 (
 	IN pFeedId INT,
 	IN pTripId varchar(30)
 )
 BEGIN
 	
-	DECLARE schemaName VARCHAR(20) DEFAULT `my_bus`.`GetSchemaFromFeedId`(pFeedId);
+	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
 
 	CALL ExecuteQuery(CONCAT(
 	'SELECT `stops`.`stop_id`, ',
@@ -53,6 +53,6 @@ END$$
 DELIMITER ;
 
 /*
-CALL `my_bus`.`GetStopsForTrip`(1, '34_3_7_merged_102031044')
+CALL `rosebud_data`.`GetStopsForTrip`(1, '34_3_7_merged_102031044')
 */
 

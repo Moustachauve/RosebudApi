@@ -1,7 +1,7 @@
-DROP FUNCTION IF EXISTS `my_bus`.`GetSchemaFromFeedId`;
+DROP FUNCTION IF EXISTS `rosebud_data`.`GetSchemaFromFeedId`;
 DELIMITER $$
 
-CREATE FUNCTION `my_bus`.`GetSchemaFromFeedId`
+CREATE FUNCTION `rosebud_data`.`GetSchemaFromFeedId`
 (
 	pFeedId INT
 )
@@ -11,7 +11,7 @@ BEGIN
 
 	SELECT 
 		`database_name` INTO return_value
-	FROM `my_bus`.`feed` 
+	FROM `rosebud_data`.`feed` 
 	WHERE `feed_id` = pFeedId;
 
 	RETURN return_value;

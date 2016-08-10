@@ -1,13 +1,13 @@
-DROP PROCEDURE IF EXISTS `my_bus`.`GetTripDetails`;
+DROP PROCEDURE IF EXISTS `rosebud_data`.`GetTripDetails`;
 DELIMITER $$
 
-CREATE PROCEDURE `my_bus`.`GetTripDetails`
+CREATE PROCEDURE `rosebud_data`.`GetTripDetails`
 (
 	IN pFeedId INT,
 	IN pTripId varchar(30))
 BEGIN
 
-	DECLARE schemaName VARCHAR(20) DEFAULT `my_bus`.`GetSchemaFromFeedId`(pFeedId);
+	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
     
 	CALL ExecuteQuery(CONCAT('SELECT * ',
 		'FROM `', schemaName, '`.`stops` ',

@@ -1,7 +1,7 @@
-DROP PROCEDURE IF EXISTS `my_bus`.`GetAllFeeds`;
+DROP PROCEDURE IF EXISTS `rosebud_data`.`GetAllFeeds`;
 DELIMITER $$
 
-CREATE PROCEDURE `my_bus`.`GetAllFeeds`
+CREATE PROCEDURE `rosebud_data`.`GetAllFeeds`
 ()
 BEGIN
     SET SESSION group_concat_max_len = 10000;
@@ -17,14 +17,14 @@ BEGIN
 					 '`agency_phone`,',
 					 '`agency_fare_url`,',
 					 '`agency_email` ',
-                 'FROM `my_bus`.`feed` feed ',
+                 'FROM `rosebud_data`.`feed` feed ',
                  'JOIN `',database_name,'`.`agency` agency ', 
                  'ON feed.database_name = ''',database_name,''' ')
                  SEPARATOR ' union all '),
                  ' ORDER BY `agency_name`')
 			
 	FROM (SELECT database_name 
-         FROM `my_bus`.`feed`
+         FROM `rosebud_data`.`feed`
          WHERE data_valid = 1
          GROUP BY database_name) AS dbdata);
 	#SELECT @stmt;
