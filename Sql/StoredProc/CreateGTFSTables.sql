@@ -55,8 +55,8 @@ BEGIN
 		`route_desc`			varchar(100)		DEFAULT NULL,
 		`route_type`			tinyint				NOT		NULL,
 		`route_url`				varchar(100)		DEFAULT NULL,
-		`route_color`			char(6)				DEFAULT \'FFFFFF\',
-		`route_text_color`		char(6)				DEFAULT \'000000\',
+		`route_color`			char(6)				DEFAULT NULL,
+		`route_text_color`		char(6)				DEFAULT NULL,
 
 		PRIMARY KEY				(`route_id`)
 	);'));
