@@ -18,4 +18,12 @@ router.get('/:routeId/', function (req, res, next) {
 	})
 })
 
+router.get('/:routeId/stops', function (req, res, next) {
+	routeAccessor.getStops(req.params.feedId, req.params.routeId, req.query.date, function (err, data) {
+		if (err) return next(err)
+		
+		res.json(data)
+	})
+})
+
 module.exports = router

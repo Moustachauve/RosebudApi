@@ -15,8 +15,21 @@ exports.getStopsForTrip = function (feedId, tripId, callback) {
 				stops: rows[0],
 				shape: rows[1]
 			}
-
+			
 			callback(null, result)
+		})
+	})
+}
+
+exports.getStopTimes = function (feedId, routeId, stopId, date, callback) {
+	sqlHelper.acquire(function (err, client) {
+		if (err) return callback(err)
+		
+		client.query("CALL `rosebud_data`.`GetStopTimes`(?, ?, ?, ?) ", [feedId, routeId, stopId, date], function (err, rows) {
+			sqlHelper.release(client)
+			if (err) return callback(err)
+			
+			callback(null, rows[0])
 		})
 	})
 }

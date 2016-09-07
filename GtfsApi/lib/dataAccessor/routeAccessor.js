@@ -32,8 +32,22 @@ exports.getRouteDetails = function (feedId, routeId, date, callback) {
 			var result = {
 				trips: rows[0]
 			}
-
+			
 			callback(null, result)
 		})
 	})
 }
+
+exports.getStops = function (feedId, routeId, date, callback) {
+	sqlHelper.acquire(function (err, client) {
+		if (err) return callback(err)
+		
+		client.query("CALL `rosebud_data`.`GetStopsForRoute`(?, ?, ?)", [feedId, routeId, date], function (err, rows) {
+			sqlHelper.release(client)
+			if (err) return callback(err)
+			
+			callback(null, rows[0])
+		})
+	})
+}
+

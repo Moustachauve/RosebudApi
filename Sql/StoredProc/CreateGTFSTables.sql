@@ -38,7 +38,7 @@ BEGIN
 		`stop_lon`				varchar(10)			NOT		NULL,
 		`zone_id`				varchar(20)			DEFAULT NULL,
 		`stop_url`				varchar(60)			DEFAULT NULL,
-		`location_type`			tinyint				DEFAULT NULL,
+		`location_type`			tinyint				DEFAULT -1,
 		`parent_station`		varchar(8)			DEFAULT NULL,
 		`stop_timezone`			varchar(20)			DEFAULT NULL,
 		`wheelchair_boarding`	tinyint				DEFAULT 0,
@@ -82,8 +82,8 @@ BEGIN
 	CALL ExecuteQuery(CONCAT('CREATE TABLE IF NOT EXISTS `', schemaNameTemp,'`.`stop_times` 
 	(
 		`trip_id`				varchar(30)			NOT		NULL,
-		`arrival_time`			char(8)				NOT		NULL,
-		`departure_time`		char(8)				NOT		NULL,
+		`arrival_time`			time				NOT		NULL,
+		`departure_time`		time				NOT		NULL,
 		`stop_id`				varchar(30)			NOT		NULL,
 		`stop_sequence`			smallint UNSIGNED 	NOT		NULL,
 		`stop_headsign`			varchar(50)			DEFAULT NULL,
@@ -153,8 +153,8 @@ BEGIN
 	CALL ExecuteQuery(CONCAT('CREATE TABLE IF NOT EXISTS `', schemaNameTemp,'`.`frequencies` 
 	(
 		`trip_id`				varchar(30)			NOT		NULL,
-		`start_time`			char(8)				NOT		NULL,
-		`end_time`				char(8)				NOT		NULL,
+		`start_time`			time				NOT		NULL,
+		`end_time`				time				NOT		NULL,
 		`headway_secs`			int UNSIGNED		NOT		NULL,
 		`exact_times`			tinyint				DEFAULT 0
 	);'));

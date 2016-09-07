@@ -4,42 +4,17 @@ DELIMITER $$
 CREATE PROCEDURE `rosebud_data`.`GetTripsForRoute`
 (
 	IN pFeedId INT,
-	IN prouteId varchar(30),
+	IN pRouteId varchar(30),
     IN pDayDate char(8)
 )
 BEGIN
 	
 	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
+	DECLARE serviceId VARCHAR(50);
     DECLARE dateDayOfWeek INT;
-    SET @serviceId = '';
     
     SET dateDayOfWeek = (SELECT DAYOFWEEK(pDayDate));
-    
-    CALL ExecuteQuery(CONCAT(
-		'SELECT GROUP_CONCAT(CONCAT(\'[\', `service_id`, \']\')) INTO @serviceId FROM ( ',
-			'SELECT `service_id` ',
-			'FROM `',schemaName,'`.`calendar_dates` ',
-			'WHERE `date` = \'',pDayDate,'\' ',
-				'AND `calendar_dates`.`exception_type` = 1 ',
-			'UNION ',
-			'SELECT `service_id` ',
-			'FROM `',schemaName,'`.`calendar` ',
-			'WHERE \'',pDayDate,'\' BETWEEN `start_date` AND `end_date` ',
-			'AND CASE ',
-				'WHEN ',dateDayOfWeek,' = 1 AND sunday = 1 THEN 1 ',
-				'WHEN ',dateDayOfWeek,' = 2 AND monday = 1 THEN 1 ',
-				'WHEN ',dateDayOfWeek,' = 3 AND tuesday = 1 THEN 1 ',
-				'WHEN ',dateDayOfWeek,' = 4 AND wednesday = 1 THEN 1 ',
-				'WHEN ',dateDayOfWeek,' = 5 AND thursday = 1 THEN 1 ',
-				'WHEN ',dateDayOfWeek,' = 6 AND friday = 1 THEN 1 ',
-				'WHEN ',dateDayOfWeek,' = 7 AND saturday = 1 THEN 1 ',
-				'ELSE 0 ',
-			'END = 1 ',
-        ') AS `service`'));
-    
-    IF @serviceId IS NULL THEN
-		SET @serviceId = '';
-	END IF;
+    CALL `rosebud_data`.`GetServiceId`(pFeedId, dateDayOfWeek, pDayDate, serviceId);
                 
 	CALL ExecuteQuery(CONCAT('SELECT `trips`.`trip_id`, ',
 									'`trip_headsign`, ',
