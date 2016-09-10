@@ -10,7 +10,7 @@ CREATE PROCEDURE `rosebud_data`.`GetStopsForRoute`
 BEGIN
 	
 	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
-	DECLARE serviceId VARCHAR(50);
+	DECLARE serviceId VARCHAR(100);
     DECLARE dateDayOfWeek INT;
     
     SET dateDayOfWeek = (SELECT DAYOFWEEK(pDayDate));

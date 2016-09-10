@@ -6,7 +6,7 @@ CREATE PROCEDURE `rosebud_data`.`GetServiceId`
 	IN pFeedId INT,
 	IN pDayOfWeek INT,
 	IN pDayDate char(8),
-	OUT pServiceIdOut VARCHAR(55)
+	OUT pServiceIdOut VARCHAR(100)
 )
 BEGIN
 	DECLARE schemaName VARCHAR(20) DEFAULT `rosebud_data`.`GetSchemaFromFeedId`(pFeedId);
