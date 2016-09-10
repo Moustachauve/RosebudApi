@@ -1,2 +1,2 @@
 #!/bin/bash
-cat *.sql | mysql -u root
+for sql_file in `ls ./*.sql`; do mysql -uroot < $sql_file ; done
