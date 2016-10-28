@@ -6,6 +6,7 @@ CREATE PROCEDURE `rosebud_data`.`GetStopTimes`
 	IN pFeedId INT,
 	IN pRouteId varchar(30),
 	IN pStopId varchar(30),
+    IN pDirectionId char(1),
     IN pDayDate char(8)
 )
 BEGIN
@@ -27,11 +28,16 @@ BEGIN
                              '`wheelchair_accessible`, ',
                              '`bikes_allowed` ', 
                              'FROM `',schemaName,'`.`trips` ',
-                             'JOIN `',schemaName,'`.`stop_times` ON `trips`.`trip_id` = `stop_times`.`trip_id` ',
+                                'JOIN `',schemaName,'`.`stop_times` ON `trips`.`trip_id` = `stop_times`.`trip_id` ',
                              'WHERE ',
-                             '    `trips`.`route_id` = \'',pRouteId,'\' ',
-                             '     AND `stop_id` = \'',pStopId,'\' ',
-                             'AND \'',serviceId,'\' LIKE CONCAT(\'%[\', `trips`.`service_id`, \']%\') ',
+                             '`trips`.`route_id` = \'',pRouteId,'\' ',
+                                'AND `stop_id` = \'',pStopId,'\' ',
+                                'AND \'',serviceId,'\' LIKE CONCAT(\'%[\', `trips`.`service_id`, \']%\') ',
+                                'AND (',
+                                  '\'', pDirectionId, '\' = \'*\' ',
+                                  'OR `direction_id` = \'', pDirectionId, '\' ',
+                                ') ',
+                             'GROUP BY `trips`.`trip_id` ',
                              'ORDER BY `departure_time` '));
 
 END$$
@@ -39,9 +45,11 @@ END$$
 DELIMITER ;
 
 /*
-	CALL `rosebud_data`.`GetStopTimes`(31, '470', '3601444', '20160620')
+	CALL `rosebud_data`.`GetStopTimes`(31, '470', '3601444', 0, '20161020')
 
-	CALL `rosebud_data`.`GetStopTimes`(1, '40', 'SCS10D', '20160826')
+	CALL `rosebud_data`.`GetStopTimes`(1, '40', 'SCS10D', 0,'20160826')
     
-	CALL `rosebud_data`.`GetStopTimes`(1, '34', 'SCS19C', '20160826')
+	CALL `rosebud_data`.`GetStopTimes`(1, '30', 'DEL9A', 1, '20160826')
+    
+	CALL `rosebud_data`.`GetStopTimes`(1, '34', 'SCS19C', 0, '20160826')
 */

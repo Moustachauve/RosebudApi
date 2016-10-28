@@ -32,8 +32,8 @@ BEGIN
 							 'FROM `',schemaName,'`.`trips` ',
 							 	'JOIN `',schemaName,'`.`stop_times` ON trips.trip_id = stop_times.trip_id AND route_id = \'', pRouteId,'\' ',
 								'JOIN `',schemaName,'`.`stops` ON `stop_times`.stop_id = stops.stop_id ',
-							 'AND \'',serviceId,'\' LIKE CONCAT(\'%[\', `trips`.`service_id`, \']%\') ',
-							 'GROUP BY stops.stop_id, stops.stop_name, direction_id, stop_sequence ',
+                                    'AND \'',serviceId,'\' LIKE CONCAT(\'%[\', `trips`.`service_id`, \']%\') ',
+							 'GROUP BY stops.stop_id, stops.stop_name, direction_id ',
 							 'ORDER BY direction_id, stop_sequence'));
 
 END$$
@@ -41,6 +41,8 @@ END$$
 DELIMITER ;
 
 /*
+	CALL `rosebud_data`.`GetStopsForRoute`(1, '30', '20160826')
+
 	CALL `rosebud_data`.`GetStopsForRoute`(31, '1', '20160620')
 
 	CALL `rosebud_data`.`GetStopsForRoute`(1, '40', '20160826')
